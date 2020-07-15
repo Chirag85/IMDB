@@ -1,0 +1,113 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./search.css" />
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <div class="float-right">
+        <li><a href="./index.html">SIGN OUT</a></li>
+      </div>
+    </ul>
+  </nav>
+  <div class="center-block">
+    <div class="example">
+      <input type="text" placeholder="Search.." id="search">
+      <button onclick="getValue()"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+
+  <div id="container">
+    <div id="img">
+    </div>
+    <div id="title">
+    </div>
+    <span id="rel">
+    </span>
+    <div id="run">
+    </div>
+    <div id="gen">
+    </div>
+    <div id="dir">
+    </div>
+    <div id="act">
+    </div>
+    <div id="award">
+    </div>
+    <div id="rat">
+    </div>
+    <div id="rated">
+    </div>
+    <div id="lang">
+    </div>
+    <div id="count">
+    </div>
+    <div id="box">
+    </div>
+
+  </div>
+  <script>
+    var name;
+    var img;
+
+    function getValue() {
+      name = document.getElementById("search").value;
+      console.log(name);
+      imdb();
+      document.getElementById("img").removeChild(img);
+    }
+    async function imdb() {
+
+      const resp = await fetch(`http://www.omdbapi.com/?t=${name}&apikey=22ac6374&`);
+      const data = await resp.json();
+      console.log(data);
+      poster = data.Poster;
+      title = data.Title;
+      release_date = data.Released;
+      genre = data.Genre;
+      director = data.Director;
+      actors = data.Actors;
+      rating = data.imdbRating;
+      box = data.BoxOffice;
+      run = data.Runtime;
+      language = data.Language;
+      awards = data.Awards;
+      rated = data.Rated;
+      country = data.Country;
+      alt = "Poster Not Available";
+      img = document.createElement("img");
+      img.setAttribute("src", poster);
+      img.setAttribute("alt", alt);
+      document.getElementById("img").appendChild(img);
+
+
+      document.getElementById("title").innerHTML = "<h4>Title : " + title + "</h4>";
+      document.getElementById("rel").innerHTML = "<h4>Released Date : " + release_date + "</h4>";
+      document.getElementById("run").innerHTML = "<h4>Run Time : " + run + "</h4>";
+      document.getElementById("gen").innerHTML = "<h4>Genre : " + genre + "</h4>";
+      document.getElementById("dir").innerHTML = "<h4>Director : " + director + "</h4>";
+      document.getElementById("act").innerHTML = "<h4>Actors : " + actors + "</h4>";
+      document.getElementById("award").innerHTML = "<h4>Awards : " + awards + "</h4>";
+      document.getElementById("lang").innerHTML = "<h4>Language : " + language + "</h4>";
+      document.getElementById("count").innerHTML = "<h4>Country : " + country + "</h4>";
+      document.getElementById("rat").innerHTML = "<h4>Rating : " + rating + "</h4>";
+      document.getElementById("rated").innerHTML = "<h4>Rated : " + rated + "</h4>";
+      document.getElementById("box").innerHTML = "<h4>Box Office : " + box + "</h4>";
+
+
+
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
